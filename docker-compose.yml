@@ -21,9 +21,9 @@ services:
       - traefik.enable.true=true
       - traefik.http.routers.invoiceninja.tls=true
       - traefik.http.routers.invoiceninja.tls.certresolver=production
-      - traefik.http.routers.heimdall.entrypoints=websecure
+      - traefik.http.routers.invoiceninja.entrypoints=websecure
       
-      - "traefik.http.routers.heimdall.rule=Host(`in.rammennoodles20.com`)"
+      - "traefik.http.routers.invoiceninja.rule=Host(`in.rammennoodles20.com`)"
 
   app:
     image: invoiceninja/invoiceninja:5
