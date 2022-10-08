@@ -14,12 +14,16 @@ services:
       - app
     # Run webserver nginx on port 80
     # Feel free to modify depending what port is already occupied
-    ports:
-      - "8010:80"
-      #- "443:443"
     networks:
       - dev
       - invoiceninja
+    labels:
+      - traefik.enable.true=true
+      - traefik.http.routers.invoiceninja.tls=true
+      - traefik.http.routers.invoiceninja.tls.certresolver=production
+      - traefik.http.routers.heimdall.entrypoints=websecure
+      
+      - "traefik.http.routers.heimdall.rule=Host(`in.rammennoodles20.com`)"
 
   app:
     image: invoiceninja/invoiceninja:5
@@ -45,8 +49,6 @@ services:
 #    For auto DB backups comment out image and use the build block below
 #    build:
 #      context: ./config/mysql
-    ports:
-      - "3305:3306"
     restart: always
     env_file: env
     volumes:
